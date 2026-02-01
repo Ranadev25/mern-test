@@ -4,6 +4,7 @@ const userRouter = require("./router/userRouter");
 const morgan = require("morgan"); 
 const { rateLimit } = require("express-rate-limit");
 const { errorResponse } = require("./middleware/response");
+const seedRouter = require("./router/seedRouter");
 
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,
@@ -16,7 +17,8 @@ app.use(limiter);
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(limiter,userRouter);
+app.use("/api/user",userRouter);
+app.use("/api/seed",seedRouter);
 
 
 app.use((req, res, next) => {
