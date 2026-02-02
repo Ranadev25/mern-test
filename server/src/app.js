@@ -13,7 +13,7 @@ const limiter = rateLimit({
 
 })
 
-app.use(limiter);
+// app.use(limiter);
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
