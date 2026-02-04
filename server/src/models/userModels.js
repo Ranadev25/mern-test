@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -22,6 +24,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       minLength: [6, "password must be at least 6 characters long"],
+      set: (v) => bcrypt.hashSync(v, bcrypt.genSaltSync(10)),
     },
 
     phone: {
