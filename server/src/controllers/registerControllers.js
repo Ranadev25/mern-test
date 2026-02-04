@@ -34,7 +34,7 @@ const registerUser = async (req, res, next) => {
       name: name,
       phone: phone,
       password: password
-    }, jwt_secret_key, "10s");
+    }, jwt_secret_key, "10m");
 
 
     // =====================
