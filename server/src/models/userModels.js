@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const { default_image } = require("../secreat");
 
 const userSchema = new mongoose.Schema(
   {
@@ -37,7 +38,7 @@ const userSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      default: null,
+      default: default_image
     },
     isAdmin: {
       type: Boolean,

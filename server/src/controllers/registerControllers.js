@@ -48,7 +48,7 @@ const registerUser = async (req, res, next) => {
     }
     
       try {
-        await sendMailer(mailerData);
+        // await sendMailer(mailerData);
       } catch (error) {
         next(createError(500, "Failed to send verification email"));
       }
