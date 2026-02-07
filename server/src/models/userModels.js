@@ -37,8 +37,9 @@ const userSchema = new mongoose.Schema(
       ],
     },
     image: {
-      type: String,
-      default: default_image
+      type: Buffer,
+      contentType: String,
+      required:[true,"Image is required"]
     },
     isAdmin: {
       type: Boolean,

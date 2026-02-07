@@ -25,7 +25,13 @@ const registerUser = async (req, res, next) => {
     //   phone
     // })
     // await newUser.save();
+    
 
+    // if i want a file with buffer data
+    if (!req.file) {
+      return next("user is required")
+    }
+    const imageBufferData = req.file.buffer.toString("base64")
 
     // =====================
     // how to create token for email verification
@@ -33,7 +39,8 @@ const registerUser = async (req, res, next) => {
       email: email,
       name: name,
       phone: phone,
-      password: password
+      password: password,
+      image:imageBufferData
     }, jwt_secret_key, "10m");
 
 

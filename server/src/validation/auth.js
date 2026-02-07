@@ -24,10 +24,20 @@ const validateUserRegistration = [
     .trim()
     .notEmpty()
     .withMessage("required your bangladesh phone Number"),
+  // body("image")
+  //   .optional()
+  //   .isString()
+  //   .withMessage("image is optional string")
+
+  // if i want store database of image file then storing to be buffer data;
   body("image")
-    .optional()
-    .isString()
-    .withMessage("image is optional string")
+    .custom((value, { req }) => {
+      if (!req.file || !req.file.buffer) {
+        throw new Error("User image is required")
+      }
+      return true;
+    })
+    .withMessage("Image is required")
 ];
 
 module.exports = validateUserRegistration;

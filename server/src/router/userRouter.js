@@ -8,6 +8,7 @@ const upload = require("../service/multer");
 const validateUserRegistration = require("../validation/auth");
 const runValidation = require("../validation/run");
 
+
 // get user by pagination
 router.get("/", userGet);
 
@@ -19,7 +20,10 @@ router.delete("/:id", deleteUser);
 
 router.post("/register", upload.single("image"), validateUserRegistration,runValidation, registerUser);
 
+
 router.post("/verify", activateUser);
 // router.post("/signing");
+
+
 
 module.exports = router;
