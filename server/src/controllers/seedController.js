@@ -1,7 +1,7 @@
 
 const { successResponse } = require("../middleware/response");
 const User = require("../models/userModels");
-const data = require("../seedData");
+const data = require("../seedData.cjs");
 
 const seedData = async (req, res, next) => {
   try {

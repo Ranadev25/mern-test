@@ -27,7 +27,7 @@ const activateUser = async (req, res, next) => {
 
     return successResponse(res, {
       statusCode: 200,
-      message: "Email verified successfully"
+      message: "user verified successfully"
     });
   } catch (error) {
 

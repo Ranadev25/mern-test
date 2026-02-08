@@ -28,10 +28,12 @@ const registerUser = async (req, res, next) => {
     
 
     // if i want a file with buffer data
-    if (!req.file) {
+    const image = req.file;
+    if (!image) {
       return next("user is required")
     }
-    const imageBufferData = req.file.buffer.toString("base64")
+    const imageBufferData = image.buffer.toString("base64")
+
 
     // =====================
     // how to create token for email verification

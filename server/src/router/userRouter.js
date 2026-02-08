@@ -2,6 +2,7 @@ const router = require("express").Router();
 const deleteUser = require("../controllers/deleteUserControllers");
 const findUserById = require("../controllers/findUserByIdController");
 const registerUser = require("../controllers/registerControllers");
+const updataUser = require("../controllers/updataUserById");
 const { userGet } = require("../controllers/userPaginationControllers");
 const activateUser = require("../controllers/verifyedUserController");
 const upload = require("../service/multer");
@@ -20,9 +21,11 @@ router.delete("/:id", deleteUser);
 
 router.post("/register", upload.single("image"), validateUserRegistration,runValidation, registerUser);
 
-
 router.post("/verify", activateUser);
-// router.post("/signing");
+
+router.put("/:id",upload.single("image"), updataUser);
+
+
 
 
 
