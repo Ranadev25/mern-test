@@ -28,7 +28,7 @@ const registerUser = async (req, res, next) => {
     
 
     // if i want a file with buffer data
-    const image = req.file;
+    const image = req.file?.path;
     if (!image) {
       return next("user is required")
     }

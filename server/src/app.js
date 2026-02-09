@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
+const cookieParser = require('cookie-parser')
 const userRouter = require("./router/userRouter");
 const morgan = require("morgan");
 const { rateLimit } = require("express-rate-limit");
 const { errorResponse } = require("./middleware/response");
 const seedRouter = require("./router/seedRouter");
+const authRouter = require("./router/authRouter");
 
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,
@@ -14,10 +16,12 @@ const limiter = rateLimit({
 
 // app.use(limiter);
 app.use(morgan("dev"));
+app.use(cookieParser)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/user", userRouter);
 app.use("/api/seed", seedRouter);
+app.use("/api/auth", authRouter);
 
 app.use((req, res, next) => {
   return errorResponse(res, {

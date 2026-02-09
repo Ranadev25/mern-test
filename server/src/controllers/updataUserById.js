@@ -1,9 +1,9 @@
 const createError = require("http-errors");
 const { successResponse } = require("../middleware/response");
 const User = require("../models/userModels");
-const createJsonWebToken = require("../service/jsonWebToken");
 const { jwt_secret_key, file_size } = require("../secreat");
 const findUser = require("../middleware/findById");
+const createJsonWebToken = require("../service/jsonWebToken");
 
 const updataUser = async (req, res, next) => {
   try {
@@ -16,7 +16,7 @@ const updataUser = async (req, res, next) => {
 
     let updates = {};
 
-    const image = req.file;
+    const image = req.file?.path;
 
 
     //=======one way to update data
@@ -81,3 +81,5 @@ const updataUser = async (req, res, next) => {
 };
 
 module.exports = updataUser;
+
+

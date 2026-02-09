@@ -10,7 +10,8 @@ const jwt_secret_key =
 const smtp_username = process.env.SMTP_USERNAME || "";
 const smtp_password = process.env.SMTP_PASSWORD || "";
 const file_size = Number(process.env.FILE_SIZE) || 2097152;
-const file_type = ["image/jpeg","image/jpg","image/png"];
+const file_type = ["image/jpeg", "image/jpg", "image/png"];
+const jwt_access_key = process.env.JWT_ACCESS_KEY || "24b04177-73d7-4e9b-8a10-2ef8111c548f"
 
 module.exports = {
   port,
@@ -21,4 +22,5 @@ module.exports = {
   default_image,
   file_size,
   file_type,
+  jwt_access_key
 };
