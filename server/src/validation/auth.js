@@ -33,11 +33,11 @@ const validateUserRegistration = [
   body("image")
     .custom((value, { req }) => {
       if (!req.file || !req.file.buffer) {
-        throw new Error("User image is required")
+        throw new Error("User image is required");
       }
       return true;
     })
-    .withMessage("Image is required")
+    .withMessage("Image is required"),
 ];
 
 module.exports = validateUserRegistration;

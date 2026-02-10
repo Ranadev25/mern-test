@@ -10,6 +10,8 @@ const registerUser = async (req, res, next) => {
   try {
     const { name, email, password, phone } = req.body;
 
+    console.log(name)
+
     const existingUser = await User.exists({ email: email });
     if (existingUser) {
       return next(createError(409, "User already exists"));
@@ -28,7 +30,7 @@ const registerUser = async (req, res, next) => {
     
 
     // if i want a file with buffer data
-    const image = req.file?.path;
+    const image = req.file;
     if (!image) {
       return next("user is required")
     }
@@ -36,7 +38,7 @@ const registerUser = async (req, res, next) => {
 
 
     // =====================
-    // how to create token for email verification
+    // // how to create token for email verification
     const token = await createJsonWebToken({
       email: email,
       name: name,
@@ -64,8 +66,8 @@ const registerUser = async (req, res, next) => {
 
     return successResponse(res, {
       statusCode: 200,
-      message: `please go to your ${email} to verify your account`,
-      payload: token
+      message: `please go to your to verify ${name} your account`,
+      payload:token
     })
     
   } catch (error) {

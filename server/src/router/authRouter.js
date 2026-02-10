@@ -1,7 +1,8 @@
-const handelLogin = require("../controllers/loginAuthControllers");
+const userLogin = require("../controllers/loginController");
 
-const authRouter = require("express").Router()
+const routerAuth = require("express").Router();
 
-authRouter.post("/login",handelLogin)
+routerAuth.post("/login",userLogin)
 
-module.exports = authRouter;
+
+module.exports = routerAuth
