@@ -3,7 +3,8 @@ const { successResponse } = require("../middleware/response");
 const User = require("../models/userModels");
 
 const findUserById = async (req, res, next) => {
-   try {
+  try {
+    //  console.log(req.body.userId)
      const id = req.params.id;
      const options = {password:0}
      const user = await findUser(User, id, options);

@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser')
 const userRouter = require("./router/userRouter");
 const morgan = require("morgan");
 const { rateLimit } = require("express-rate-limit");
@@ -14,9 +14,9 @@ const limiter = rateLimit({
   message: "Too many requests from this IP, place try again after 5 minutes",
 });
 
+app.use(cookieParser());
 // app.use(limiter);
 app.use(morgan("dev"));
-// app.use(cookieParser);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/user", userRouter);
