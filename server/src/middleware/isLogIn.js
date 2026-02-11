@@ -1,6 +1,7 @@
 const createError = require("http-errors");
 const jwt = require("jsonwebtoken");
 const { jwt_access_key } = require("../secreat");
+const User = require("../models/userModels");
 
 const isLoggedIn = async (req, res, next) => {
   try {
@@ -15,7 +16,9 @@ const isLoggedIn = async (req, res, next) => {
       throw createError(404, "Invalid Access token. Place login first");
     }
 
-    // req.body.userId = decoded._id;
+    const user = await User.findOne({_id:decoded._id})
+
+    req.user = user;
     next();
 
   } catch (error) {

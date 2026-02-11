@@ -23,10 +23,11 @@ const userLogin = async (req, res, next) => {
     if (user.isBanned) {
       throw createError(403, "you are banned. places contract authority");
     }
+
     const accessToken = await createJsonWebToken(
       { _id: user._id },
       jwt_access_key,
-      "10m",
+      "30m",
     );
 
     res.cookie("token", accessToken, {
@@ -39,7 +40,7 @@ const userLogin = async (req, res, next) => {
     return successResponse(res, {
       statusCode: 200,
       message: "user login successfully",
-      payload: {},
+      payload: user,
     });
   } catch (error) {
     next(error);

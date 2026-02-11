@@ -5,6 +5,7 @@ const registerUser = require("../controllers/registerControllers");
 const updataUser = require("../controllers/updataUserById");
 const { userGet } = require("../controllers/userPaginationControllers");
 const activateUser = require("../controllers/verifyedUserController");
+const isAdmin = require("../middleware/isAdmin");
 const isLoggedIn = require("../middleware/isLogIn");
 const isLogOut = require("../middleware/isLogOut");
 const upload = require("../service/multer");
@@ -12,10 +13,10 @@ const validateUserRegistration = require("../validation/auth");
 const runValidation = require("../validation/run");
 
 // get user by pagination
-router.get("/", userGet);
+router.get("/",isLoggedIn, isAdmin, userGet);
 
 // get user by id
-router.get("/:id", findUserById);
+router.get("/:id",isLoggedIn, findUserById);
 
 // delete user by id
 router.delete("/:id",isLoggedIn,  deleteUser);
