@@ -7,13 +7,15 @@ const deleteImage = require("../middleware/deleteImage");
 
 const deleteUser = async (req, res, next) => {
   try {
+
     const id = req.params.id;
     const options = { password: 0 };
     const user = await findUser(User, id, options);
 
+
     // delete user image from server
-    const userImage = user.image;
-    await deleteImage(userImage)
+    // const userImage = user.image;
+    // await deleteImage(userImage)
 
 
     //  i can used promises also to delete image file
@@ -36,8 +38,8 @@ const deleteUser = async (req, res, next) => {
        }
      })*/
 
+    
     await User.findByIdAndDelete({ _id: id, isAdmin: false });
-
     return successResponse(res, {
       statusCode: 200,
       message: "User deleted successfully",
@@ -45,6 +47,8 @@ const deleteUser = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+
 };
+
 
 module.exports = deleteUser;

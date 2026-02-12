@@ -29,6 +29,7 @@ const userLogin = async (req, res, next) => {
       jwt_access_key,
       "30m",
     );
+    const userWithoutPassword = await User.findOne({ email }).select("-password");
 
     res.cookie("token", accessToken, {
       maxAge: 30 * 60 * 1000,
@@ -40,7 +41,7 @@ const userLogin = async (req, res, next) => {
     return successResponse(res, {
       statusCode: 200,
       message: "user login successfully",
-      payload: user,
+      payload: userWithoutPassword,
     });
   } catch (error) {
     next(error);

@@ -6,7 +6,8 @@ const data = {
       password: "bibu@123",
       phone: "01712345678",
       isBanned: false,
-      isAdmin: false,
+      isAdmin: true,
+      image:"default.png"
     },
     {
       name: "Rana Ahmed",
@@ -15,6 +16,8 @@ const data = {
       phone: "01898765432",
       isBanned: false,
       isAdmin: false,
+      image:"default.png"
+
     },
     {
       name: "Hasan Ali",
@@ -23,6 +26,7 @@ const data = {
       phone: "01911223344",
       isBanned: false,
       isAdmin: false,
+      image:"default.png"
     },
   ],
 };
