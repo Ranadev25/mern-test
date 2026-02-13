@@ -1,4 +1,4 @@
-const findUser = require("../middleware/findById");
+const findUser = require("../services/findById");
 // const fs = require("fs");
 const fs = require("fs").promises;
 const User = require("../models/userModels");
@@ -7,16 +7,13 @@ const deleteImage = require("../middleware/deleteImage");
 
 const deleteUser = async (req, res, next) => {
   try {
-
     const id = req.params.id;
     const options = { password: 0 };
-    const user = await findUser(User, id, options);
-
+    await findUser(User, id, options);
 
     // delete user image from server
     // const userImage = user.image;
     // await deleteImage(userImage)
-
 
     //  i can used promises also to delete image file
     /*await fs.access(userImage)
@@ -38,17 +35,17 @@ const deleteUser = async (req, res, next) => {
        }
      })*/
 
-    
     await User.findByIdAndDelete({ _id: id, isAdmin: false });
     return successResponse(res, {
       statusCode: 200,
       message: "User deleted successfully",
     });
   } catch (error) {
+    if (error instanceof mongoose.Error.CastError) {
+      throw createError(400, "Invalid item ID");
+    }
     next(error);
   }
-
 };
-
 
 module.exports = deleteUser;

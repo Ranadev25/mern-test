@@ -40,7 +40,6 @@ const validateUserRegistration = [
     .withMessage("Image is required"),
 ];
 
-
 const validateUserLogin = [
   body("email")
     .trim()
@@ -57,7 +56,4 @@ const validateUserLogin = [
     .withMessage("password should be at least 6-15 characters long"),
 ];
 
-
-
-
-module.exports = {validateUserRegistration,validateUserLogin};
+module.exports = { validateUserRegistration, validateUserLogin };

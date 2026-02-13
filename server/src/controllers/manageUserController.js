@@ -7,14 +7,13 @@ const handelManageUser = async (req, res, next) => {
     const action = req.body.action;
     const userId = req.params.id;
 
-    const newUpdata = await handelUserManage(userId,action)
+    const newUpdata = await handelUserManage(userId, action);
 
     return successResponse(res, {
       statusCode: 200,
       message: newUpdata.successMessage,
-      payload:newUpdata,
-    })
-
+      payload: newUpdata,
+    });
   } catch (error) {
     next(error);
   }
