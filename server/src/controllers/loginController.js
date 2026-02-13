@@ -2,8 +2,8 @@ const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
 const { successResponse } = require("../middleware/response");
 const User = require("../models/userModels");
-const createJsonWebToken = require("../service/jsonWebToken");
 const { jwt_access_key } = require("../secreat");
+const createJsonWebToken = require("../third-party/jsonWebToken");
 
 const userLogin = async (req, res, next) => {
   try {
@@ -29,7 +29,9 @@ const userLogin = async (req, res, next) => {
       jwt_access_key,
       "30m",
     );
-    const userWithoutPassword = await User.findOne({ email }).select("-password");
+    const userWithoutPassword = await User.findOne({ email }).select(
+      "-password",
+    );
 
     res.cookie("token", accessToken, {
       maxAge: 30 * 60 * 1000,

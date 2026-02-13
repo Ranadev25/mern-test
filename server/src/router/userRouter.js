@@ -1,16 +1,17 @@
 const router = require("express").Router();
-const handelBannedUser = require("../controllers/bannedUserControllers");
+// const handelBannedUser = require("../controllers/bannedUserControllers");
 const deleteUser = require("../controllers/deleteUserControllers");
 const findUserById = require("../controllers/findUserByIdController");
+const handelManageUser = require("../controllers/manageUserController");
 const registerUser = require("../controllers/registerControllers");
-const handelUnBannedUser = require("../controllers/unBannedControllers");
+// const handelUnBannedUser = require("../controllers/unBannedControllers");
 const updataUser = require("../controllers/updataUserById");
 const { userGet } = require("../controllers/userPaginationControllers");
 const activateUser = require("../controllers/verifyedUserController");
 const isAdmin = require("../middleware/isAdmin");
 const isLoggedIn = require("../middleware/isLogIn");
 const isLogOut = require("../middleware/isLogOut");
-const upload = require("../service/multer");
+const upload = require("../third-party/multer");
 const { validateUserRegistration } = require("../validation/auth");
 const runValidation = require("../validation/run");
 
@@ -37,8 +38,8 @@ router.post("/verify", isLogOut, activateUser);
 
 router.put("/:id", upload.single("image"), isLoggedIn, updataUser);
 
-router.put("/ban-user/:id", isLoggedIn, isAdmin, handelBannedUser);
+router.put("/manage-user/:id", isLoggedIn, isAdmin, handelManageUser);
 
-router.put("/unban-user/:id",isLoggedIn, isAdmin, handelUnBannedUser);
+// router.put("/unban-user/:id",isLoggedIn, isAdmin, handelUnBannedUser);
 
 module.exports = router;

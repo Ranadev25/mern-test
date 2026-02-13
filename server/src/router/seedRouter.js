@@ -1,5 +1,5 @@
 const { seedData } = require("../controllers/seedController");
-const upload = require("../service/multer");
+const upload = require("../third-party/multer");
 
 const seedRouter = require("express").Router();
 

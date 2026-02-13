@@ -3,21 +3,19 @@ const { successResponse } = require("../middleware/response");
 const User = require("../models/userModels");
 const { jwt_secret_key, file_size } = require("../secreat");
 const findUser = require("../middleware/findById");
-const createJsonWebToken = require("../service/jsonWebToken");
+const createJsonWebToken = require("../third-party/jsonWebToken");
 
 const updataUser = async (req, res, next) => {
   try {
-    
     const userId = req.params.id;
-    const userOptions = {password:0}
-    await findUser(User,userId,userOptions)
+    const userOptions = { password: 0 };
+    await findUser(User, userId, userOptions);
     const { name, email, password, phone } = req.body;
     const updateOptions = { new: true, runValidators: true, context: "query" };
 
     let updates = {};
 
     const image = req.file?.path;
-
 
     //=======one way to update data
     // if (name) {
@@ -33,10 +31,9 @@ const updataUser = async (req, res, next) => {
     //   updates.phone = phone;
     // }
 
-
     for (let key in req.body) {
       if (["name", "email", "password", "phone"].includes(key)) {
-        updates[key] = req.body[key]
+        updates[key] = req.body[key];
       }
     }
 
@@ -47,18 +44,22 @@ const updataUser = async (req, res, next) => {
           "file size is too large. It must  be less than 2 MB",
         );
       }
-      updates.image = image.buffer.toString("base64")
+      updates.image = image.buffer.toString("base64");
     }
 
-    const updatedUser = await User.findByIdAndUpdate(userId, updates, updateOptions);
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      updates,
+      updateOptions,
+    );
 
     if (!updatedUser) {
-      throw createError(404,"Update User with this ID does not exist")
+      throw createError(404, "Update User with this ID does not exist");
     }
 
     // =====================
     // how to create token for email verification
-   await createJsonWebToken(
+    await createJsonWebToken(
       {
         email: email,
         name: name,
@@ -81,5 +82,3 @@ const updataUser = async (req, res, next) => {
 };
 
 module.exports = updataUser;
-
-
