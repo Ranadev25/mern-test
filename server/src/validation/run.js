@@ -14,7 +14,6 @@ const runValidation = async (req,res,next) => {
     return next()
   } catch (error) {
     return next(error)
-
   }
 }
 

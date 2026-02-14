@@ -4,6 +4,7 @@ const deleteUser = require("../controllers/deleteUserControllers");
 const findUserById = require("../controllers/findUserByIdController");
 const handelManageUser = require("../controllers/manageUserController");
 const registerUser = require("../controllers/registerControllers");
+const updatePassword = require("../controllers/updataPassword");
 // const handelUnBannedUser = require("../controllers/unBannedControllers");
 const updataUser = require("../controllers/updataUserById");
 const { userGet } = require("../controllers/userPaginationControllers");
@@ -12,7 +13,7 @@ const isAdmin = require("../middleware/isAdmin");
 const isLoggedIn = require("../middleware/isLogIn");
 const isLogOut = require("../middleware/isLogOut");
 const upload = require("../third-party/multer");
-const { validateUserRegistration } = require("../validation/auth");
+const { validateUserRegistration, validateUserPasswordUpdate } = require("../validation/auth");
 const runValidation = require("../validation/run");
 
 // get user by pagination
@@ -40,6 +41,6 @@ router.put("/:id", upload.single("image"), isLoggedIn, updataUser);
 
 router.put("/manage-user/:id", isLoggedIn, isAdmin, handelManageUser);
 
-// router.put("/unban-user/:id",isLoggedIn, isAdmin, handelUnBannedUser);
+router.put("/update-password/:id",validateUserPasswordUpdate, runValidation, isLoggedIn, updatePassword);
 
 module.exports = router;

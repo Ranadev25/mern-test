@@ -56,4 +56,30 @@ const validateUserLogin = [
     .withMessage("password should be at least 6-15 characters long"),
 ];
 
-module.exports = { validateUserRegistration, validateUserLogin };
+
+const validateUserPasswordUpdate = [
+  body("oldPassword")
+    .trim()
+    .notEmpty()
+    // .matches(regax here with all characters)
+    .withMessage("Old password is required")
+    .isLength({ min: 6, max: 15 })
+    .withMessage("password should be at least 6-15 characters long"),
+  body("newPassword")
+    .trim()
+    .notEmpty()
+    // .matches(regax here with all characters)
+    .withMessage("new password is required")
+    .isLength({ min: 6, max: 15 })
+    .withMessage("new password should be at least 6-15 characters long"),
+  body("confirmPassword")
+    .custom((value, { req }) => {
+      if (value !== req.body.newPassword) {
+        throw new Error("Password is not match")
+      }
+      return true
+    })
+    
+];
+
+module.exports = { validateUserRegistration, validateUserLogin,validateUserPasswordUpdate };
