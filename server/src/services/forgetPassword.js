@@ -6,13 +6,13 @@ const { jwt_forget_key } = require("../secreat");
 
 const forgetPassword = async (email) => {
   try {
-    const user = await User.findOne({email}, { password: 0 });
+    const user = await User.findOne({ email }, { password: 0 });
 
     if (!user) {
       throw createError(404, "user not found with this email");
     }
 
-    const token = await createJsonWebToken({email}, jwt_forget_key, "30m");
+    const token = await createJsonWebToken({ email }, jwt_forget_key, "30m");
 
     const mailerData = {
       email: email,
@@ -25,12 +25,12 @@ const forgetPassword = async (email) => {
     try {
       await sendMailer(mailerData);
     } catch (error) {
-      next(createError(500, "Failed to send forget password email"));
+      throw createError(500, "Failed to send forget password email");
     }
-    return token
+    return token;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
 module.exports = forgetPassword;

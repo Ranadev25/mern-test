@@ -92,5 +92,18 @@ const validateUserForgetPassword = [
     .withMessage("Invalid email address"),
     
 ];
+const validateUserResetPassword = [
+  body("token")
+    .trim()
+    .notEmpty()
+    .withMessage("token is required"),
+  body("newPassword")
+    .trim()
+    .notEmpty()
+    // .matches(regax here with all characters)
+    .withMessage("new password is required")
+    .isLength({ min: 6, max: 15 })
+    .withMessage("new password should be at least 6-15 characters long"),
+];
 
-module.exports = { validateUserRegistration, validateUserLogin,validateUserPasswordUpdate,validateUserForgetPassword };
+module.exports = { validateUserRegistration, validateUserLogin,validateUserPasswordUpdate,validateUserForgetPassword,validateUserResetPassword };
