@@ -27,18 +27,33 @@ const userLogin = async (req, res, next) => {
     const accessToken = await createJsonWebToken(
       { _id: user._id },
       jwt_access_key,
-      "30m",
-    );
-    const userWithoutPassword = await User.findOne({ email }).select(
-      "-password",
+      "1m",
     );
 
     res.cookie("token", accessToken, {
-      maxAge: 30 * 60 * 1000,
+      maxAge: 1 * 60 * 1000,
       httpOnly: true,
       secure: true,
       sameSite: "none",
     });
+
+    const refreshToken = await createJsonWebToken(
+      { _id: user._id },
+      jwt_access_key,
+      "5d",
+    );
+
+    res.cookie("refreshToken", refreshToken, {
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
+
+
+    const userWithoutPassword = await User.findOne({ email }).select(
+      "-password",
+    );
 
     return successResponse(res, {
       statusCode: 200,
