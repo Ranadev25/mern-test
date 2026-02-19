@@ -4,6 +4,7 @@ const deleteUser = require("../controllers/deleteUserControllers");
 const findUserById = require("../controllers/findUserByIdController");
 const handelForgetPassword = require("../controllers/forgotPassword");
 const handelManageUser = require("../controllers/manageUserController");
+const handelRefreshToken = require("../controllers/refreshToken");
 const registerUser = require("../controllers/registerControllers");
 const handleResetPassword = require("../controllers/reset_password");
 const updatePassword = require("../controllers/updataPassword");
@@ -68,6 +69,11 @@ router.post(
   validateUserForgetPassword,
   runValidation,
   handelForgetPassword,
+);
+
+router.get(
+  "/refresh-token",
+  handelRefreshToken,
 );
 
 module.exports = router;

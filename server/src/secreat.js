@@ -12,7 +12,8 @@ const smtp_password = process.env.SMTP_PASSWORD || "";
 const file_size = Number(process.env.FILE_SIZE) || 2097152;
 const file_type = ["image/jpeg", "image/jpg", "image/png"];
 const jwt_access_key = process.env.JWT_ACCESS_KEY || "24b04177-73d7-4e9b-8a10-2ef8111c548f"
-const jwt_forget_key = process.env.JWT_FORGET_PASSWORD_SECRET_KEY || "24b04177-73d7-4e9b-8a10-2ef8111c"
+const jwt_forget_key = process.env.JWT_FORGET_PASSWORD_SECRET_KEY || "24b04177-73d7-4e9b-8a10-2ef8111c";
+const jwt_refresh_key = process.env.JWT_REFRESH_KEY || "24b04177-4e9b-8a10-2ef8111c";
 
 module.exports = {
   port,
@@ -24,5 +25,6 @@ module.exports = {
   file_size,
   file_type,
   jwt_access_key,
-  jwt_forget_key
+  jwt_forget_key,
+  jwt_refresh_key
 };

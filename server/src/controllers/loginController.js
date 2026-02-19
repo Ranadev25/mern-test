@@ -2,7 +2,7 @@ const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
 const { successResponse } = require("../middleware/response");
 const User = require("../models/userModels");
-const { jwt_access_key } = require("../secreat");
+const { jwt_access_key, jwt_refresh_key } = require("../secreat");
 const createJsonWebToken = require("../third-party/jsonWebToken");
 
 const userLogin = async (req, res, next) => {
@@ -39,7 +39,7 @@ const userLogin = async (req, res, next) => {
 
     const refreshToken = await createJsonWebToken(
       { _id: user._id },
-      jwt_access_key,
+      jwt_refresh_key,
       "5d",
     );
 
