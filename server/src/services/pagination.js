@@ -1,3 +1,4 @@
+const createHttpError = require("http-errors");
 const User = require("../models/userModels");
 
 const handelPagination = async (search, page, limit) => {
@@ -18,6 +19,10 @@ const handelPagination = async (search, page, limit) => {
       .limit(limit);
 
     const count = await User.find(filter, { password: 0 }).countDocuments();
+
+    if (!user || user.length === 0) {
+      throw createHttpError(400,"no user found")
+    }
 
     return {
       user,

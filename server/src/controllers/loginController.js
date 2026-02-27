@@ -4,6 +4,7 @@ const { successResponse } = require("../middleware/response");
 const User = require("../models/userModels");
 const { jwt_access_key, jwt_refresh_key } = require("../secreat");
 const createJsonWebToken = require("../third-party/jsonWebToken");
+const { setRefreshToken, setAccessToken } = require("../middleware/setToken");
 
 const userLogin = async (req, res, next) => {
   try {
@@ -27,15 +28,10 @@ const userLogin = async (req, res, next) => {
     const accessToken = await createJsonWebToken(
       { _id: user._id },
       jwt_access_key,
-      "1m",
+      "5m",
     );
 
-    res.cookie("token", accessToken, {
-      maxAge: 1 * 60 * 1000,
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    });
+    await setAccessToken(res,accessToken)
 
     const refreshToken = await createJsonWebToken(
       { _id: user._id },
@@ -43,17 +39,11 @@ const userLogin = async (req, res, next) => {
       "5d",
     );
 
-    res.cookie("refreshToken", refreshToken, {
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    });
+    await setRefreshToken(res,refreshToken)
 
-
-    const userWithoutPassword = await User.findOne({ email }).select(
-      "-password",
-    );
+    const userWithoutPassword = user.toObject();
+    delete userWithoutPassword.password
+    
 
     return successResponse(res, {
       statusCode: 200,

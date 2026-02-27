@@ -4,14 +4,17 @@ const User = require("../models/userModels");
 const createJsonWebToken = require("../third-party/jsonWebToken");
 const { jwt_secret_key } = require("../secreat");
 const sendMailer = require("../third-party/mailer");
+const userExists = require("../middleware/isExsist");
+const emailSend = require("../middleware/sendEmail");
 
 const registerUser = async (req, res, next) => {
+
   try {
     const { name, email, password, phone } = req.body;
-
     console.log(name);
+    
+    const existingUser = await userExists(email);
 
-    const existingUser = await User.exists({ email: email });
     if (existingUser) {
       return next(createError(409, "User already exists"));
     }
@@ -56,16 +59,12 @@ const registerUser = async (req, res, next) => {
       <p>Click <a href="http://localhost:5173/api/user/${token}" target="_blank">here</a> to verify your email.</p>`,
     };
 
-    try {
-      // await sendMailer(mailerData);
-    } catch (error) {
-      next(createError(500, "Failed to send verification email"));
-    }
+
+    await emailSend(mailerData)
 
     return successResponse(res, {
       statusCode: 200,
       message: `please go to your to verify ${name} your account`,
-      payload: token,
     });
   } catch (error) {
     next(error);

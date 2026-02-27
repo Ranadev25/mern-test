@@ -13,9 +13,12 @@ const updateUser = async (userId, req) => {
 
     const image = req.file?.path;
 
-    for (let key in req.body) {
-      if (["name", "email", "password", "phone"].includes(key)) {
+    const allowedFields = ["name", "email", "password", "phone"]
+    for (const key in req.body) {
+      if (allowedFields.includes(key)) {
         updates[key] = req.body[key];
+      } else if (key === "email") {
+        throw new Error("email can nor be updated")
       }
     }
 

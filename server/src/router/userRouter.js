@@ -4,7 +4,6 @@ const deleteUser = require("../controllers/deleteUserControllers");
 const findUserById = require("../controllers/findUserByIdController");
 const handelForgetPassword = require("../controllers/forgotPassword");
 const handelManageUser = require("../controllers/manageUserController");
-const handelRefreshToken = require("../controllers/refreshToken");
 const registerUser = require("../controllers/registerControllers");
 const handleResetPassword = require("../controllers/reset_password");
 const updatePassword = require("../controllers/updataPassword");
@@ -28,10 +27,10 @@ const runValidation = require("../validation/run");
 router.get("/", isLoggedIn, isAdmin, userGet);
 
 // get user by id
-router.get("/:id", isLoggedIn, isAdmin, findUserById);
+router.get(`/:id`, isLoggedIn, isAdmin, findUserById);
 
 // delete user by id
-router.delete("/:id", isLoggedIn, isAdmin, deleteUser);
+router.delete(`/:id`, isLoggedIn, isAdmin, deleteUser);
 
 //
 router.post(
@@ -52,12 +51,12 @@ router.put(
   handleResetPassword,
 );
 
-router.put("/:id", upload.single("image"), isLoggedIn, updataUser);
+router.put(`/:id`, upload.single("image"), isLoggedIn, updataUser);
 
-router.put("/manage-user/:id", isLoggedIn, isAdmin, handelManageUser);
+router.put(`/manage-user/:id`, isLoggedIn, isAdmin, handelManageUser);
 
 router.put(
-  "/update-password/:id",
+  `/update-password/:id`,
   validateUserPasswordUpdate,
   runValidation,
   isLoggedIn,
@@ -71,9 +70,5 @@ router.post(
   handelForgetPassword,
 );
 
-router.get(
-  "/refresh-token",
-  handelRefreshToken,
-);
 
 module.exports = router;
