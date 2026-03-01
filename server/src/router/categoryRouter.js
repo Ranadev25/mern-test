@@ -1,5 +1,9 @@
 const categoryRouter = require("express").Router();
-const handelCreateCategory = require("../controllers/categoryControllers");
+const handelUpdateCategory = require("../controllers/categoryUpdate");
+const handelCreateCategory = require("../controllers/createCategoryControllers");
+const handelDeleteCategory = require("../controllers/deleteCategory");
+const handelGetAllCategory = require("../controllers/getAllCategory");
+const handelGetSingleCategory = require("../controllers/getsingelCaregory");
 const registerUser = require("../controllers/registerControllers");
 const updataUser = require("../controllers/updataUserById");
 const { userGet } = require("../controllers/userPaginationControllers");
@@ -13,8 +17,18 @@ const runValidation = require("../validation/run");
 
 
 
+categoryRouter.post("/", validateCategory, runValidation, isLoggedIn, isAdmin, handelCreateCategory);
 
-categoryRouter.post("/",validateCategory, runValidation,isLoggedIn, isAdmin, handelCreateCategory)
+categoryRouter.get("/", isLoggedIn, handelGetAllCategory)
+
+
+categoryRouter.get("/:slug", isLoggedIn, handelGetSingleCategory)
+
+
+categoryRouter.put("/:slug", isLoggedIn, isAdmin, handelUpdateCategory)
+
+
+categoryRouter.delete("/:slug",isLoggedIn,isAdmin, handelDeleteCategory)
 
 
 

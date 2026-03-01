@@ -1,17 +1,17 @@
-const createError = require("http-errors");
 const { successResponse } = require("../middleware/response");
-const userExists = require("../middleware/isExsist");
+const { createCategory } = require("../services/serviceCategory");
 
 const handelCreateCategory = async (req, res, next) => {
 
   try {
     const { name } = req.body;
 
-    console.log(name)
+    const newCategory = await createCategory(name);
 
     return successResponse(res, {
-      statusCode: 200,
-      message:"category was created successfully"
+      statusCode: 201,
+      message: "category was created successfully",
+      payload:newCategory
     });
   } catch (error) {
     next(error);

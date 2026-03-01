@@ -28,7 +28,7 @@ const userLogin = async (req, res, next) => {
     const accessToken = await createJsonWebToken(
       { _id: user._id },
       jwt_access_key,
-      "5m",
+      "30m",
     );
 
     await setAccessToken(res,accessToken)

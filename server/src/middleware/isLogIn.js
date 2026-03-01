@@ -5,7 +5,7 @@ const User = require("../models/userModels");
 
 const isLoggedIn = async (req, res, next) => {
   try {
-    const token = req.cookies?.token;
+    const token = req.cookies?.accessToken;
     if (!token) {
       throw createError(404, "Access token is not found");
     }
@@ -16,11 +16,10 @@ const isLoggedIn = async (req, res, next) => {
       throw createError(404, "Invalid Access token. Place login first");
     }
 
-    const user = await User.findOne({_id:decoded._id})
+    const user = await User.findOne({ _id: decoded._id });
 
     req.user = user;
     next();
-
   } catch (error) {
     next(error);
   }

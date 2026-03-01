@@ -1,7 +1,7 @@
 const setAccessToken = async (res, accessToken) => {
   try {
-    return res.cookie("token", accessToken, {
-      maxAge: 5 * 60 * 1000,
+    return res.cookie("accessToken", accessToken, {
+      maxAge: 30 * 60 * 1000,
       httpOnly: true,
       secure: true,
       sameSite: "none",
@@ -11,7 +11,7 @@ const setAccessToken = async (res, accessToken) => {
   }
 };
 
-const setRefreshToken = async (res,refreshToken) => {
+const setRefreshToken = async (res, refreshToken) => {
   try {
     return res.cookie("refreshToken", refreshToken, {
       maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -24,8 +24,7 @@ const setRefreshToken = async (res,refreshToken) => {
   }
 };
 
-
 module.exports = {
   setAccessToken,
-  setRefreshToken
-}
+  setRefreshToken,
+};
