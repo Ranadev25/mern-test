@@ -8,6 +8,7 @@ const { errorResponse } = require("./middleware/response");
 const seedRouter = require("./router/seedRouter");
 const routerAuth = require("./router/authRouter");
 const categoryRouter = require("./router/categoryRouter");
+const productRouter = require("./router/productRouter");
 
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000,
@@ -24,6 +25,7 @@ app.use("/api/user", userRouter);
 app.use("/api/seed", seedRouter);
 app.use("/api/auth", routerAuth);
 app.use("/api/category", categoryRouter);
+app.use("/api/product", productRouter);
 
 app.use((req, res) => {
   return errorResponse(res, {
