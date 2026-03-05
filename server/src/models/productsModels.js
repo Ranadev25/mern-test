@@ -35,6 +35,10 @@ const productSchema = new mongoose.Schema(
         message:(props)=> `${props.value} is not valid price. price must be greater then 0`
       }
     },
+    category: {
+      type: String,
+      required:true,
+    },
     quantity: {
       type: Number,
       required: [true, "Product quantity is required"],
