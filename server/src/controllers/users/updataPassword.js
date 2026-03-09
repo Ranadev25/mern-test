@@ -1,6 +1,6 @@
 
-const { successResponse } = require("../middleware/response");
-const updateUserPassword = require("../services/passwordUpdate");
+const { successResponse } = require("../../middleware/response");
+const updateUserPassword = require("../../services/passwordUpdate");
 
 const updatePassword = async (req, res, next) => {
   try {

@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/userModels");
+// const User = require("../models/userModels");
 const createHttpError = require("http-errors");
-const { successResponse, errorResponse } = require("../middleware/response");
-const { jwt_access_key } = require("../secreat");
+const { successResponse, errorResponse } = require("../../middleware/response");
+const { jwt_access_key } = require("../../secreat");
+const User = require("../../models/userModels");
 
 const handelProtectedRoute = async (req, res, next) => {
   try {

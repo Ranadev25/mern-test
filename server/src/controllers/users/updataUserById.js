@@ -1,10 +1,10 @@
 
-const { successResponse } = require("../middleware/response");
-const User = require("../models/userModels");
-const { jwt_secret_key, file_size } = require("../secreat");
-const findUser = require("../services/findById");
-const createJsonWebToken = require("../third-party/jsonWebToken");
-const updateUser = require("../services/updata");
+const { successResponse } = require("../../middleware/response");
+const User = require("../../models/userModels");
+const { jwt_secret_key, file_size } = require("../../secreat");
+const findUser = require("../../services/findById");
+const createJsonWebToken = require("../../third-party/jsonWebToken");
+const updateUser = require("../../services/updata");
 
 const updataUser = async (req, res, next) => {
   try {

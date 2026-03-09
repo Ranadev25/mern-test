@@ -1,7 +1,7 @@
-const userLogin = require("../controllers/loginController");
-const handelLogout = require("../controllers/logOutcontroller");
-const handelProtectedRoute = require("../controllers/protectedController");
-const handelRefreshToken = require("../controllers/refreshToken");
+const userLogin = require("../controllers/users/loginController");
+const handelLogout = require("../controllers/users/logOutcontroller");
+const handelProtectedRoute = require("../controllers/users/protectedController");
+const handelRefreshToken = require("../controllers/users/refreshToken");
 const isLoggedIn = require("../middleware/isLogIn");
 const isLogOut = require("../middleware/isLogOut");
 const { validateUserLogin } = require("../validation/auth");

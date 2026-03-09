@@ -1,6 +1,6 @@
-const findUser = require("../services/findById");
-const { successResponse } = require("../middleware/response");
-const User = require("../models/userModels");
+const findUser = require("../../services/findById");
+const { successResponse } = require("../../middleware/response");
+const User = require("../../models/userModels");
 
 const findUserById = async (req, res, next) => {
   try {

@@ -1,5 +1,5 @@
-const { successResponse } = require("../middleware/response");
-const reset_password = require("../services/resetPassword");
+const { successResponse } = require("../../middleware/response");
+const reset_password = require("../../services/resetPassword");
 
 const handleResetPassword = async (req, res, next) => {
 

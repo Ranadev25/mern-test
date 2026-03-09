@@ -22,10 +22,10 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/user", userRouter);
-app.use("/api/seed", seedRouter);
+app.use("/api", seedRouter);
 app.use("/api/auth", routerAuth);
 app.use("/api/category", categoryRouter);
-app.use("/api/product", productRouter);
+app.use("/api", productRouter);
 
 app.use((req, res) => {
   return errorResponse(res, {

@@ -1,4 +1,4 @@
-const { successResponse } = require("../middleware/response");
+const { successResponse } = require("../../middleware/response");
 
 const handelLogout = async (req, res, next) => {
   try {

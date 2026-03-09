@@ -1,9 +1,9 @@
-const findUser = require("../services/findById");
-const { successResponse } = require("../middleware/response");
-const User = require("../models/userModels");
+const findUser = require("../../services/findById");
+const { successResponse } = require("../../middleware/response");
+const User = require("../../models/userModels");
 const createError = require("http-errors");
 
-const handelBannedUser = async (req, res, next) => {
+const handelUnBannedUser = async (req, res, next) => {
   try {
     const userId = req.params.id;
     await findUser(User, userId);
@@ -15,17 +15,17 @@ const handelBannedUser = async (req, res, next) => {
     };
     const update = await User.findByIdAndUpdate(
       userId,
-      { isBanned: true },
+      { isBanned: false },
       options,
     ).select("-password");
 
     if (!update) {
-      throw createError(404, "user was not banned successfully");
+      throw createError(404, "user was banned successfully");
     }
 
     return successResponse(res, {
       statusCode: 200,
-      message: "user was banned successfully",
+      message: "user was unBanned successfully",
       payload: update,
     });
   } catch (error) {
@@ -33,4 +33,4 @@ const handelBannedUser = async (req, res, next) => {
   }
 };
 
-module.exports = handelBannedUser;
+module.exports = handelUnBannedUser;

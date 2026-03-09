@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
-const { jwt_refresh_key, jwt_access_key } = require("../secreat");
-const { successResponse, errorResponse } = require("../middleware/response");
-const User = require("../models/userModels");
-const createJsonWebToken = require("../third-party/jsonWebToken");
+const { jwt_refresh_key, jwt_access_key } = require("../../secreat");
+const { successResponse, errorResponse } = require("../../middleware/response");
+const User = require("../../models/userModels");
+const createJsonWebToken = require("../../third-party/jsonWebToken");
 const createHttpError = require("http-errors");
 
 const handelRefreshToken = async (req, res, next) => {

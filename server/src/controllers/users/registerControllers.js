@@ -1,11 +1,9 @@
 const createError = require("http-errors");
-const { successResponse } = require("../middleware/response");
-const User = require("../models/userModels");
-const createJsonWebToken = require("../third-party/jsonWebToken");
-const { jwt_secret_key } = require("../secreat");
-const sendMailer = require("../third-party/mailer");
-const userExists = require("../middleware/isExsist");
-const emailSend = require("../middleware/sendEmail");
+const { successResponse } = require("../../middleware/response");
+const createJsonWebToken = require("../../third-party/jsonWebToken");
+const { jwt_secret_key } = require("../../secreat");
+const userExists = require("../../middleware/isExsist");
+const emailSend = require("../../middleware/sendEmail");
 
 const registerUser = async (req, res, next) => {
 
@@ -65,6 +63,7 @@ const registerUser = async (req, res, next) => {
     return successResponse(res, {
       statusCode: 200,
       message: `please go to your to verify ${name} your account`,
+      payload: token,
     });
   } catch (error) {
     next(error);

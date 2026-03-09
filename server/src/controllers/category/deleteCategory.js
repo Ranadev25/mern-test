@@ -1,5 +1,5 @@
-const { successResponse } = require("../middleware/response");
-const deleteCategory = require("../services/deletecategory");
+const { successResponse } = require("../../middleware/response");
+const deleteCategory = require("../../services/deletecategory");
 
 const handelDeleteCategory = async (req, res, next) => {
   try {

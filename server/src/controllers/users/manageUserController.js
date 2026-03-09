@@ -1,6 +1,6 @@
-const { successResponse } = require("../middleware/response");
-const User = require("../models/userModels");
-const handelUserManage = require("../services/handelBan");
+const { successResponse } = require("../../middleware/response");
+const User = require("../../models/userModels");
+const handelUserManage = require("../../services/handelBan");
 
 const handelManageUser = async (req, res, next) => {
   try {

@@ -1,5 +1,5 @@
-const { successResponse } = require("../middleware/response");
-const updateCategory = require("../services/updateCatagory");
+const { successResponse } = require("../../middleware/response");
+const updateCategory = require("../../services/updateCatagory");
 
 
 const handelUpdateCategory = async (req, res, next) => {

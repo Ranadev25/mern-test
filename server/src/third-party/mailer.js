@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 const { smtp_username, smtp_password } = require("../secreat");
-const logger = require("../controllers/loggerControllers");
+const logger = require("../controllers/loger/loggerControllers");
 
 
 const transporter = nodemailer.createTransport({

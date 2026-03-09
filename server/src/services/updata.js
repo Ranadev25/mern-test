@@ -1,6 +1,7 @@
 const User = require("../models/userModels");
 const createError = require("http-errors");
 const findUser = require("./findById");
+const {mongoose } = require("mongoose");
 
 const updateUser = async (userId, req) => {
   try {

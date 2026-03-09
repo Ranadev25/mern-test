@@ -1,9 +1,9 @@
-const findUser = require("../services/findById");
+const findUser = require("../../services/findById");
 // const fs = require("fs");
 const fs = require("fs").promises;
-const User = require("../models/userModels");
-const { successResponse } = require("../middleware/response");
-const deleteImage = require("../middleware/deleteImage");
+const User = require("../../models/userModels");
+const { successResponse } = require("../../middleware/response");
+const deleteImage = require("../../middleware/deleteImage");
 
 const deleteUser = async (req, res, next) => {
   try {

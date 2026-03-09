@@ -1,10 +1,10 @@
 const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
-const { successResponse } = require("../middleware/response");
-const User = require("../models/userModels");
-const { jwt_access_key, jwt_refresh_key } = require("../secreat");
-const createJsonWebToken = require("../third-party/jsonWebToken");
-const { setRefreshToken, setAccessToken } = require("../middleware/setToken");
+const { successResponse } = require("../../middleware/response");
+const User = require("../../models/userModels");
+const { jwt_access_key, jwt_refresh_key } = require("../../secreat");
+const createJsonWebToken = require("../../third-party/jsonWebToken");
+const { setRefreshToken, setAccessToken } = require("../../middleware/setToken");
 
 const userLogin = async (req, res, next) => {
   try {

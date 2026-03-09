@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const createError = require("http-errors");
-const { jwt_secret_key } = require("../secreat");
-const { successResponse } = require("../middleware/response");
-const User = require("../models/userModels");
+const { jwt_secret_key } = require("../../secreat");
+const { successResponse } = require("../../middleware/response");
+const User = require("../../models/userModels");
 
 const activateUser = async (req, res, next) => {
   try {

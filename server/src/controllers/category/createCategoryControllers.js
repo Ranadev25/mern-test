@@ -1,5 +1,5 @@
-const { successResponse } = require("../middleware/response");
-const { createCategory } = require("../services/serviceCategory");
+const { successResponse } = require("../../middleware/response");
+const { createCategory } = require("../../services/serviceCategory");
 
 const handelCreateCategory = async (req, res, next) => {
 
